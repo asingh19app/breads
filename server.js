@@ -12,13 +12,15 @@ app.set('views', __dirname + '/views')
 app.set('view engine', 'jsx')
 app.engine('jsx', require('express-react-views').createEngine())
 
+
+//BREADS ROUTE
+app.use('/breads', require('./controllers/breads_controller'))
+
 //ROUTES
 app.get('/',(req,res) => {
     res.send('Welcome to the Awesome App about Breads!')
 })
 
-//BREADS ROUTE
-app.use('/breads', require('./controllers/breads_controller'))
 
 //LISTEN
 app.listen(PORT, () => {

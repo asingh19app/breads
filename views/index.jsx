@@ -1,9 +1,8 @@
 const React = require('react')
-const breads_types = require('../models/breads_types')
 const Default = require('./layouts/default')
 
 function Index ({breads})  {
-    return(
+    return (
       <Default>
         <h2>Index Page</h2>
        <ul>

@@ -3,6 +3,7 @@ const breads = express.Router()
 const Bread = require('../models/breads_types')
 
 //INDEX 
+//this get allows us to display all of the bread names
 breads.get('/', (req,res) => {
 
     res.render('index',
@@ -10,17 +11,16 @@ breads.get('/', (req,res) => {
             breads: Bread
         }
     )
-    // res.render('index', 
-    // {
-    //    breads: Bread
-    // }
-    // )
 })
 
-// breads.get('/:arrayIndex',(req,res) => {
-//     res.send(breadTypes[req.params.arrayIndex])
-   // res.send(breadTypes)
-    //res.send('This is the index at /breads')
-// })
+//this get allows us to showacse the data information per indice
+breads.get('/:arrayIndex',(req,res) => {
+ res.send(Bread[req.params.arrayIndex])
+
+ })
 
 module.exports = breads
+
+//TO SET FOR IMAGE
+//let x = Bread[req.paramas.arrayIndex].image
+//res.send(~<img src=x></img>
