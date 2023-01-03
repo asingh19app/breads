@@ -12,6 +12,9 @@ app.set('views', __dirname + '/views')
 app.set('view engine', 'jsx')
 app.engine('jsx', require('express-react-views').createEngine())
 
+//MIDDLEWARE
+app.use(express.static('public'))
+
 
 //BREADS ROUTE
 app.use('/breads', require('./controllers/breads_controller'))
@@ -21,6 +24,10 @@ app.get('/',(req,res) => {
     res.send('Welcome to the Awesome App about Breads!')
 })
 
+//404 PAGE 
+app.get('*', (req,res) => {
+    res.send('404')
+})
 
 //LISTEN
 app.listen(PORT, () => {
