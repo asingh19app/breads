@@ -11,9 +11,8 @@ console.log(PORT)
 app.set('views', __dirname + '/views')
 app.set('view engine', 'jsx')
 app.engine('jsx', require('express-react-views').createEngine())
-
-//MIDDLEWARE
 app.use(express.static('public'))
+app.use(express.urlencoded({extended:true}))
 
 
 //BREADS ROUTE
