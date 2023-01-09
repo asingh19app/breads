@@ -22,11 +22,16 @@ breads.get('/new', (req,res) => {
 })
 
 //EDIT
-breads.get('/:indexArray/edit', (req,res) => {
-    res.render('edit', {
-        bread: Bread[req.params.indexArray],
-        index: req.params.indexArray
+breads.get('/:id/edit', (req,res) => {
+    Bread.findById(req.params.id)
+    .then(foundBread => {
+        res.render('edit', {
+            bread: foundBread,
+            //Change the value of the bread key to foundBread so that it uses the data we just received from our database.
+            //Delete the index key. We no longer need to reference the ID from the parameter because we will have access to the ID in bread.
+        })
     })
+    
 })
 
 
@@ -57,22 +62,32 @@ breads.post('/', (req,res) => {
 })
 
 //UPDATE
-breads.put('/:arrayIndex', (req,res) => {
+breads.put('/:id', (req,res) => {
     if(req.body.hasGluten === 'on'){
         req.body.hasGluten = true
     } else {
         req.body.hasGluten = false
     }
-    Bread[req.params.arrayIndex] = req.body
-    res.redirect(`/breads/${req.params.arrayIndex}`)
+    Bread.findByIdAndUpdate(req.params.id, req.body, {new:true})
+    //req.body is an object that captures everything the user types into a form. In this case, it will capture all the changes the user typed into the edit form on the edit view.
+    //Let's also use an options object here. For the third argument, pass an options object so we can use the new option that we learned about on the slides and set it to true.
+    .then(updatedBread => {
+        console.log(updatedBread)
+        res.redirect(`/breads/${req.params.id}`)
+    })
+  
 })
 
 
 
 //DELETE 
-breads.delete('/:indexArray', (req,res) => {
-    Bread.splice(req.params.indexArray,1)
+breads.delete('/:id', (req,res) => {
+   Bread.findByIdAndDelete(req.params.id)
+   .then(deletedBread => {
     res.status(303).redirect('/breads')
+    console.log(deletedBread)
+   })
+    
 })
 
 module.exports = breads
