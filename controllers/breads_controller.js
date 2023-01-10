@@ -40,7 +40,9 @@ breads.get('/:id/edit', (req,res) => {
 //changed "/:indexArray" to "/:id" bc we are using an id helper method and bc we do not have an array anymore
 breads.get('/:id', (req,res) => {
    Bread.findById(req.params.id)
-   .then(foundBread=> {
+   .then(foundBread => {
+   const bakedBy = foundBread.getBakedBy()
+   console.log(bakedBy)
     res.render('show', {
         bread:foundBread
     })
