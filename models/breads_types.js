@@ -8,9 +8,7 @@ const breadSchema = new Schema({
   hasGluten: { type: Boolean },
   image: { type: String, default: 'http://placehold.it/500x500.png' },
   baker: {
-    type:String,
-    enum: ['Rachel', 'Monica', 'Joey', 'Chandler', 'Ross', 'Phoebe']
-  
+    type: Schema.Types.ObjectID, ref:'Baker'
   }
 })
 
@@ -23,3 +21,4 @@ return(
 //model and export
 const Bread = mongoose.model('Bread', breadSchema)
 module.exports = Bread
+

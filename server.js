@@ -25,6 +25,7 @@ app.use(methodOverride('_method'))
 
 //BREADS ROUTE
 app.use('/breads', require('./controllers/breads_controller'))
+app.use('/bakers', require('./controllers/bakers_controller'))
 
 //ROUTES
 app.get('/',(req,res) => {

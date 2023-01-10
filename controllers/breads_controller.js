@@ -1,6 +1,7 @@
 const express = require('express')
 const breads = express.Router()
 const Bread = require('../models/breads_types')
+const Baker = require('../models/baker')
 
 //INDEX 
 //this get allows us to display all of the bread names
@@ -18,7 +19,11 @@ breads.get('/', (req,res) => {
 
 //NEW
 breads.get('/new', (req,res) => {
-    res.render('new')
+    Baker.find()
+    .then(foundBakers => {
+        res.render('new', {bakers:foundBakers})
+        //Pass the res.render a variable object with a key of bakers and value of foundBakers. This will send all the baker data we just found to our new view.
+    })
 })
 
 //EDIT
