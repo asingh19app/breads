@@ -28,15 +28,20 @@ breads.get('/new', (req,res) => {
 
 //EDIT
 breads.get('/:id/edit', (req,res) => {
-    Bread.findById(req.params.id)
-    .then(foundBread => {
-        res.render('edit', {
-            bread: foundBread,
-            //Remember, the .findById method returns a promise, so use .then on it and pass it a callback with an argument variable that will hold the response.
-            //Change the value of the bread key to foundBread so that it uses the data we just received from our database.
-            //Delete the index key. We no longer need to reference the ID from the parameter because we will have access to the ID in bread.
+    Baker.find()
+    .then(foundBakers => {
+        Bread.findById(req.params.id)
+        .then(foundBread => {
+            res.render('edit', {
+                bread: foundBread,
+                bakers: foundBakers
+                //Remember, the .findById method returns a promise, so use .then on it and pass it a callback with an argument variable that will hold the response.
+                //Change the value of the bread key to foundBread so that it uses the data we just received from our database.
+                //Delete the index key. We no longer need to reference the ID from the parameter because we will have access to the ID in bread.
+            })
         })
     })
+    
     
 })
 
@@ -45,6 +50,7 @@ breads.get('/:id/edit', (req,res) => {
 //changed "/:indexArray" to "/:id" bc we are using an id helper method and bc we do not have an array anymore
 breads.get('/:id', (req,res) => {
    Bread.findById(req.params.id)
+   .populate('baker')
    .then(foundBread => {
    const bakedBy = foundBread.getBakedBy()
    console.log(bakedBy)
