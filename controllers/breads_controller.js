@@ -27,6 +27,7 @@ breads.get('/:id/edit', (req,res) => {
     .then(foundBread => {
         res.render('edit', {
             bread: foundBread,
+            //Remember, the .findById method returns a promise, so use .then on it and pass it a callback with an argument variable that will hold the response.
             //Change the value of the bread key to foundBread so that it uses the data we just received from our database.
             //Delete the index key. We no longer need to reference the ID from the parameter because we will have access to the ID in bread.
         })
