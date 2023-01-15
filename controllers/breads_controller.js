@@ -4,14 +4,18 @@ const Bread = require('../models/breads_types')
 const Baker = require('../models/baker')
 
 //INDEX 
-//this get allows us to display all of the bread names
+//this get allows us to display all of the bread names and baker names
 breads.get('/', (req,res) => {
-    Bread.find()
-    .then(foundBreads => {
-        res.render('Index',
-        {
-            breads: foundBreads,
-            title: 'Index Page'
+    Baker.find()
+    .then(foundBakers => {
+        Bread.find()
+        .then(foundBreads => {
+            res.render('Index',
+            {
+                breads: foundBreads,
+                bakers: foundBakers,
+                title: 'Index Page'
+            })
         })
     })
 })

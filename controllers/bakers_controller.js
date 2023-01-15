@@ -14,9 +14,18 @@ baker.get('/', (req,res) => {
     })
 })
 
+//SHOW PAGE FOR BAKERS
+baker.get('/:id', (req,res) => {
+    Baker.findById(req.params.id)
+    .populate('breads')
+    .then(foundBaker => {
+        res.render('bakerShow', {
+            baker: foundBaker
+        })
+    })
+})
 
-
-
+//baker info
 baker.get('/data/seed', (req,res) => {
 Baker.insertMany(bakerSeedData)
 .then(res.redirect('/breads'))

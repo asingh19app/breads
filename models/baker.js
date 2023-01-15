@@ -20,7 +20,8 @@ bakerSchema.virtual('breads', {
      ref:'Bread',
      localField:'_id',
      foreignField: 'baker'
-})
+},
+{ toJSON: { virtuals: true}})
 
 //model and export
 const Baker = mongoose.model('Baker', bakerSchema)
