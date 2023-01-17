@@ -7,7 +7,7 @@ const Baker = require('../models/baker')
 //this get allows us to display all of the bread names and baker names
 breads.get('/', async (req,res) => {
    const foundBakers = await Baker.find()
-    const foundBreads = await Bread.find().limit(2)
+    const foundBreads = await Bread.find()
     res.render('index', {
         breads:foundBreads,
         bakers:foundBakers,
