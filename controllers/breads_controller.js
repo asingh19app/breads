@@ -5,18 +5,13 @@ const Baker = require('../models/baker')
 
 //INDEX 
 //this get allows us to display all of the bread names and baker names
-breads.get('/', (req,res) => {
-    Baker.find()
-    .then(foundBakers => {
-        Bread.find()
-        .then(foundBreads => {
-            res.render('Index',
-            {
-                breads: foundBreads,
-                bakers: foundBakers,
-                title: 'Index Page'
-            })
-        })
+breads.get('/', async (req,res) => {
+   const foundBakers = await Baker.find()
+    const foundBreads = await Bread.find().limit(2)
+    res.render('index', {
+        breads:foundBreads,
+        bakers:foundBakers,
+        title:'Index Page'
     })
 })
 
