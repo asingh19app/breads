@@ -18,8 +18,7 @@ baker.get('/', (req,res) => {
 baker.get('/:id', (req,res) => {
     Baker.findById(req.params.id)
     .populate({
-        path:'breads',
-        options: {limit:5}
+        path:'breads'
     })
     .then(foundBaker => {
         res.render('bakerShow', {
