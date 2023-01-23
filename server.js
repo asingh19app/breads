@@ -47,3 +47,6 @@ mongoose.connect(MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true},
         console.log('connected to mongo:', MONGO_URI)
     }
     )
+
+
+    module.exports = app;
